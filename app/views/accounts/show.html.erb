@@ -1,0 +1,47 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @account.name %>
+  <strong>Balance:</strong>
+  <%= @account.balance %>
+</p>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Value</th>
+      <th>Transaction date</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <%= render @account.transactions %>
+    <%= form_for(@account.transactions.new) do |f| %>
+      <tr>
+        <%= f.hidden_field :account_id, value: @account.id %>
+        <td>
+          <%= f.text_field :name, placeholder: "Name" %>
+        </td>
+        <td>
+          <%= f.text_field :value, placeholder: "Value" %>
+        </td>
+        <td>
+          <%= f.text_field :transaction_date, type: "date" %>
+        </td>
+        <td>
+          <%= f.button :submit, class: "btn btn-primary" %>
+        </td>
+        <td></td>
+        <td></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Edit', edit_account_path(@account) %> |
+<%= link_to 'Back', accounts_path %>
